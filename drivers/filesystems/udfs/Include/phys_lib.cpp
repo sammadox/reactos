@@ -2724,8 +2724,10 @@ UDFGetBlockSize(
                     RC = STATUS_UNRECOGNIZED_VOLUME;
                 try_return(RC);
             }
-            if(PartitionInfo->PartitionType != PARTITION_IFS) {
+            if (PartitionInfo->PartitionType != PARTITION_IFS && PartitionInfo->PartitionType != PARTITION_HUGE)
+            {
                 UDFPrint(("UDFGetBlockSize: PartitionInfo->PartitionType != PARTITION_IFS\n"));
+                UDFPrint(("UDFGetBlockSize: PartitionInfo->PartitionType is %x\n", PartitionInfo->PartitionType));
                 try_return(RC = STATUS_UNRECOGNIZED_VOLUME);
             }
         } else {
